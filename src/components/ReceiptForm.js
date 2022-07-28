@@ -8,7 +8,7 @@ const ReceiptForm = () => {
         const date = event.target.date.value;
         const amount = event.target.amount.value;
         const allData = { date, amount }
-        setData([...data, allData ])
+        setData([...data, allData])
         event.target.reset()
     }
 
@@ -16,12 +16,41 @@ const ReceiptForm = () => {
         <div className='container'>
             <div className='receipt-container'>
                 <h3 className='receipt-details'>Receipt Details </h3>
-                <form onSubmit={receiptSubmit}>
-                    <input name='date' type="text" placeholder='Enter Date' />
-                    <input name='amount' type="number" placeholder='Enter Amount (in INR)' />
-                    <input type="submit" value='SUBMIT' />
+                <form className='form-container' onSubmit={receiptSubmit}>
+
+                    <div>
+                        <label htmlFor="date">Date<sup>*</sup></label>
+                        <input className='dateInput' name='date' type="text" placeholder='Enter Date' />
+                    </div>
+
+                    <div>
+                        <label htmlFor="amount">Amount<sup>*</sup></label>
+                        <input className='amountInput' name='amount' type="number" placeholder='Enter Amount (in INR)' />
+                    </div>
+
+
+                   <div>
+                    <label htmlFor="payment">Payment mode<sup>*</sup></label>
+                   <select className='paymentSelect' name="payment" id="cars">
+                        <option value="volvo">Cash</option>
+                        <option value="saab">Google Pay</option>
+                        <option value="mercedes">Credit Card</option>
+                        <option value="audi">PayTm</option>
+                    </select>
+                   </div>
+
+             <div>
+                <label htmlFor="remark">Remark </label>
+             <input className='remarkInput' name='amount' type="text" placeholder='Enter remark' />
+             </div>
+
+                    <div className='buttons-container'>
+                        <button className='cancelButton' >CANCEL <br /> <span>(ESC)</span></button>
+                        <button  type="submit"  className='submitButton' >SUBMIT <br /><span> (% S)</span></button>
+                       
+                    </div>
                 </form>
-                <p>date:{data?.allData?.date}</p>
+
             </div>
         </div>
     );

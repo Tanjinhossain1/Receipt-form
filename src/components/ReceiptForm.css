@@ -1,15 +1,96 @@
-
-.container{
-    background-color: rgb(245 245 245);
+.container {
+    
     height: 1000px;
+   margin-top: 150px;
 }
 
-.receipt-container{
-    width: 75%;
+.receipt-container {
+    width: 50%;
+    padding: 40px;
+    border-radius: 2px;
     margin: auto;
+    background-color: rgb(245 245 245);
 }
 
-.receipt-details{
+.receipt-details {
     text-decoration: underline;
     color: rgb(30 32 27 / 1);
- }
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+sup{
+    color: red;
+}
+label{
+    font-size: 20px;
+}
+.dateInput {
+    background-color:transparent;
+    padding: 7px 5px;
+    margin-left: 150px;
+    width: 200px;
+    border-radius: 5px;
+    border: solid 2px gray;
+}
+
+.amountInput {
+    background-color:transparent;
+    padding: 7px 5px;
+    margin-left: 120px;
+    width: 500px;
+    border-radius: 5px;
+    border: solid 2px gray;
+}
+
+.paymentSelect {
+    background-color:transparent;
+    padding: 7px 5px;
+    margin-left: 59px;
+    font-weight: 700;
+    width: 300px;
+    border-radius: 5px;
+    border: solid 2px gray;
+}
+
+.remarkInput {
+    background-color:transparent;
+    padding: 7px 5px;
+    margin-left: 127px;
+    width: 500px;
+    border-radius: 5px;
+    border: solid 2px gray;
+}
+
+.buttons-container{
+width: 75%;
+margin: auto;
+margin-top: 15px;
+}
+
+.cancelButton{  
+    padding: 15px 50px;
+    color: rgb(202 94 88);
+    font-weight: 600;
+    border: solid 2px rgb(231 196 195);
+    border-radius: 8px;
+    background-color: transparent;
+    margin-left: 100px;   
+}
+
+.submitButton{
+    margin-left: 100px;
+    padding: 15px 50px;
+    color: rgb(246 248 245);
+    font-weight: 600;
+   border-radius: 8px;
+   border: 0;
+    background-color: rgb(69 123 59);
+}
+span{
+    text-decoration: underline;
+}
