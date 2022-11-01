@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ReceiptForm.css';
 
 const ReceiptForm = () => {
+    const [updateReceipt,setUpdateReceipt]=useState({})
     const [receipt, setReceipt] = useState([])
+    const [filter,setFilter] = useState(false)
+    useEffect(()=>{
+        fetch('')
+        .then(res=>res.json())
+        .then(data=>setReceipt(data))
+    },[])
     const receiptSubmit = (event) => {
         event.preventDefault()
         const date = event.target.date.value;
@@ -13,21 +20,32 @@ const ReceiptForm = () => {
         setReceipt([...receipt, allData])
         event.target.reset()
     }
-    console.log(receipt)
+    console.log(updateReceipt)
+
+        // fetch('',{
+        //     method:'PUT',
+        //     headers:{
+        //         'content-type':'application/json'
+        //     },
+        //     body:JSON.stringify({data})
+        // })
+        const cashDetail = receipt.filter(r=>r.payment==='Cash');
+        console.log(cashDetail)
     return (
         <div className='container'>
+
             <div className='receipt-container'>
                 <h3 className='receipt-details'>Receipt Details </h3>
                 <form className='form-container' onSubmit={receiptSubmit}>
                     {/* date input  */}
                     <div>
                         <label htmlFor="date">Date<sup>*</sup></label>
-                        <input required className='dateInput' name='date' type="date" placeholder='Enter Date' />
+                        <input value={updateReceipt&&updateReceipt.date} required className='dateInput' name='date' type="date" placeholder='Enter Date' />
                     </div>
                     {/* amount input  */}
                     <div>
                         <label htmlFor="amount">Amount<sup>*</sup></label>
-                        <input required className='amountInput' name='amount' type="number" placeholder='Enter Amount (in INR)' />
+                        <input value={updateReceipt&&updateReceipt.amount}  required className='amountInput' name='amount' type="number" placeholder='Enter Amount (in INR)' />
                     </div>
 
                     {/* payment mood select  */}
@@ -56,6 +74,7 @@ const ReceiptForm = () => {
                 </form>
 
             </div>
+            <button onClick={()=>setFilter(!filter)}>filter</button>
             <table>
                 <tr>
                     <th>Number</th>
@@ -63,19 +82,36 @@ const ReceiptForm = () => {
                     <th>Amount</th>
                     <th>Payment mode</th>
                     <th>Remark</th>
+                    <th>update</th>
                 </tr>
                 {
-                    receipt.map((r, index) =>
-                        <tr key={index + 1}>
-                            <td>{index}</td>
-                            <td>{r.date}</td>
-                            <td> {r.amount}</td>
-                            <td>{r.payment}</td>
-                            <td>{r.remark}</td>
-                        </tr>
-                    )
+                    filter&& cashDetail.map((r, index) =>
+                    <tr key={index + 1}>
+                        <td>{index}</td>
+                        <td>{r.date}</td>
+                        <td> {r.amount}</td>
+                        <td>{r.payment}</td>
+                        <td>{r.remark}</td>
+                        <td onClick={()=>setUpdateReceipt(r)}>update</td>
+                    </tr>)
                 }
-                <button onClick={()=>setReceipt([])} className='reset-button'>reset</button>
+                {
+                    !filter&&receipt.map((r, index) =>
+                    <tr key={index + 1}>
+                        <td>{index}</td>
+                        <td>{r.date}</td>
+                        <td> {r.amount}</td>
+                        <td>{r.payment}</td>
+                        <td>{r.remark}</td>
+                        <td onClick={()=>setUpdateReceipt(r)}>update</td>
+                    </tr>
+                )
+                }
+                
+                
+               <button onClick={()=>setReceipt([])} className='reset-button'>reset</button>
+               
+              
             </table>
         </div>
     );
